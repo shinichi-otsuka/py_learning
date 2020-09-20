@@ -41,7 +41,6 @@ def insert(table, row, col, element):
     else:
         insert(table, row, col + 1, element)
 
-
 # httpsの証明書検証を実行している
 http = urllib3.PoolManager(
     cert_reqs='CERT_REQUIRED',
@@ -55,7 +54,6 @@ for tag in soup.find_all("script"):
     tag.decompose()
 
 symbols = ['S','K']
-#delimiter = ","
 
 #table = soup.find_all("table")
 for i in range(1,3):
@@ -74,5 +72,6 @@ for i in range(1,3):
     for c_i, col in enumerate(df.columns):
         if not col.strip():
             df.drop(df.columns[c_i], axis=1, inplace=True)
+    #1列目にsymbolsの内容を挿入
     df.insert(0,'',symbols[i-1])
     df.to_csv('out' + str(i) + '.csv', sep=',', encoding='utf-8', header=True, index=False)
